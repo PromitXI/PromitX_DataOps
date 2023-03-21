@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "syn-dev-dataops-eus"
+		},
+		"syn-dev-dataops-eus-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:syn-dev-dataops-eus.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"syn-dev-dataops-eus-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://devsynpromit.dfs.core.windows.net"
+		}
+	}
+}
