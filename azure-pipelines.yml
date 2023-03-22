@@ -1,0 +1,32 @@
+trigger:
+- workspace_publish
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  env: 'qa'
+  workspace: 'syn-$(env)-dataops-eus'
+
+
+steps:
+
+- bash: |
+    pwd
+    
+    ls -l
+  displayName: Multiline Bash Script
+  env:
+    name: Microsoft
+
+
+- task: AzureSynapseWorkspace.synapsecicd-deploy.synapse-deploy.Synapse workspace deployment@2
+  displayName: 'Synpase deployment task for workspace: syn-$(env)-data-eus '
+  inputs:
+    TemplateFile: '/home/vsts/work/1/s/syn-dev-dataops-eus/TemplateForWorkspace.json'
+    ParametersFile: '/home/vsts/work/1/s/syn-dev-dataops-eus/TemplateParametersForWorkspace.json'
+    azureSubscription: 'Promit''s Cloud(3)(58a3cb06-91b3-4f09-82b8-882ec0a9c038)'
+    ResourceGroupName: 'RG-QA-DataOps-EUS'
+    TargetWorkspaceName: 'syn-$(env)-dataops-eus '
+    OverrideArmParameters: '-workspaceName $(env)'
+    npmpackage: ppe
